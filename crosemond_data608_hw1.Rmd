@@ -1,10 +1,8 @@
 ---
 title: "Data 608 HW 1"
-name: C. Rosemond
-date: 02.14.2021
+date: C. Rosemond - 02.14.2021
 output:
   html_document: default
-  html_notebook: default
 ---
 
 **Principles of Data Visualization and Introduction to ggplot2**
@@ -44,6 +42,8 @@ library(scales)
 skim(inc[-1]) # remove `Rank`, which is a unique identifier
 ```
 
+####
+
 ## Question 1
 
 Create a graph that shows the distribution of companies in the dataset by State (ie how many are in each state). There are a lot of States, so consider which axis you should use. This visualization is ultimately going to be consumed on a 'portrait' oriented screen (ie taller than wide), which should further guide your layout choices.
@@ -66,6 +66,8 @@ inc %>%
 * I combined the main title and source (Inc. Magazine) to save space.
 * Noting the cramped y-axis labels, I played around with the aspect ratio, assuming 640 x 320 pixels on a phone screen and thus a ratio of 20. There was little substantive difference from the default ratio, which I kept. Instead, I made the label text slightly smaller, which isn't ideal.
 * The number of companies tracks loosely with state/territory population.
+
+####
 
 ## Question 2
 
@@ -92,6 +94,8 @@ NY %>%
 * I included the source as a subtitle to save space in the main title.
 * There is a lot of "ink" devoted to text, but it all seems necessary for clarity. It is difficult to remove anything without knowing the specific audience (beyond perhaps another state employee).
 * Distribution spread varies substantially across industries. Notably, "Financial Services", "Software", "IT Services", and "Media" appear to show the greatest spreads in company employment.
+
+####
 
 ## Question 3
 
