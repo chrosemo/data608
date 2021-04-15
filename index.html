@@ -1,0 +1,266 @@
+<html>
+
+<head>
+    <title>DATA 608 - Assignment 5</title>
+    <meta charset="utf-8">
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 2px black solid;
+            font: 12px sans-serif;
+        }
+        
+        th {
+            border: 1px black solid;
+            padding: 5px;
+            text-align: left;
+        }
+
+        tr {
+            border: 1px black solid;
+            padding: 5px;
+        }
+
+        td {
+            border: 1px black solid;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h3>---</h3>
+
+<h1>DATA 608 - Assignment 5</h1>
+
+<h2>C. Rosemond</h2>
+
+<h3>---</h3>
+
+<!--
+	Beginner
+	- Reverse word
+	- Table of multiples
+-->
+
+<h3>Beginner</h3>
+
+<!--Reverse word-->
+
+<script type='text/javascript'>
+
+document.write('<p>Enter a character string (ASCII) to return its reverse.')
+
+function reverse(word) {
+    return word.split('').reverse().join('');
+};
+
+function reversal() {
+    var input = document.getElementById('text_input');
+    input.innerHTML = reverse(document.getElementById('word').value);
+};
+
+</script>
+
+<form>
+
+<input type='text' id='word' value=''>
+<input type='button' value='Find reverse' onClick='reversal()'>
+	
+</form>
+
+<div id='text_input'></div>
+
+<h3>---</h3>
+
+<!--Table of multiples-->
+
+<script type='text/javascript'>
+
+document.write('<p>Enter a number to return its first 20 multiples.')
+
+function twenty(num) {
+    const array = [];
+  	for (var i = 1; i <= 20; i++) 
+  		array.push(num * i);
+    var table = "<table><tr><td style='text-align: right;'>" + array[0] + "</td>";
+    table+="<td style='text-align: right;'>" + array[1] + "</td>";
+    table+="<td style='text-align: right;'>" + array[2] + "</td>";
+    table+="<td style='text-align: right;'>" + array[3] + "</td></tr>";
+    table+="<tr><td style='text-align: right;'>" + array[4] + "</td>";
+    table+="<td style='text-align: right;'>" + array[5] + "</td>";
+    table+="<td style='text-align: right;'>" + array[6] + "</td>";
+    table+="<td style='text-align: right;'>" + array[7] + "</td></tr>";
+    table+="<tr><td style='text-align: right;'>" + array[8] + "</td>";
+    table+="<td style='text-align: right;'>" + array[9] + "</td>";
+    table+="<td style='text-align: right;'>" + array[10] + "</td>";
+    table+="<td style='text-align: right;'>" + array[11] + "</td></tr>";
+    table+="<tr><td style='text-align: right;'>" + array[12] + "</td>";
+    table+="<td style='text-align: right;'>" + array[13] + "</td>";
+    table+="<td style='text-align: right;'>" + array[14] + "</td>";
+    table+="<td style='text-align: right;'>" + array[15] + "</td></tr>";
+    table+="<tr><td style='text-align: right;'>" + array[16] + "</td>";
+    table+="<td style='text-align: right;'>" + array[17] + "</td>";
+    table+="<td style='text-align: right;'>" + array[18] + "</td>";
+    table+="<td style='text-align: right;'>" + array[19] + "</td></tr></table>";
+    return table;
+};
+
+function multiples(){
+    var input = document.getElementById('num_input');
+    input.innerHTML = twenty(document.getElementById('num').value);
+};
+
+</script>
+
+<form>
+
+<input type='number' id='num' value=''>
+<input type='button' value='Find first 20 multiples' onClick='multiples()'>
+	
+</form>
+
+<div id='num_input'></div>
+
+<h3>---</h3>
+
+<h3>Intermediate</h3>
+
+<script src='http://d3js.org/d3.v3.min.js' charset='utf-8'></script>
+
+<script type='text/javascript' charset='utf-8'></script>
+
+<!--
+Presidents table
+
+The code below is adapted directly from "d3js: Create a table using data from a CSV file" from Github user jfreels, available at https://gist.github.com/jfreels/6814721.
+-->
+
+<script>
+
+document.write('<p>Create a table of presidents\' heights and weights.')
+
+function tabulate1(data,columns) {
+  var table = d3.select('#prez1').append('table')
+    var thead = table.append('thead')
+    var tbody = table.append('tbody')
+
+    thead.append('tr')
+      .selectAll('th')
+        .data(columns)
+        .enter()
+      .append('th')
+        .text(function (d) { return d })
+
+    var rows = tbody.selectAll('tr')
+        .data(data)
+        .enter()
+      .append('tr')
+
+    var cells = rows.selectAll('td')
+        .data(function(row) {
+            return columns.map(function (column) {
+                return { column: column, value: row[column] }
+          })
+      })
+      .enter()
+    .append('td')
+      .text(function (d) { return d.value })
+
+  return table;
+}
+
+function clear_table1() {
+  return d3.select('#prez1').selectAll('table').remove();
+};
+
+function csv() {
+    var prez = d3.csv('presidents.csv', function(data) {
+        var columns = ['Name','Height','Weight']
+        tabulate1(data,columns);
+    });
+};  
+
+</script>
+
+<form>
+
+<input type='button' value='Create table' onClick='clear_table1(); csv()'>
+<input type='button' value='Remove table' onClick='clear_table1()'>
+    
+</form>
+
+<div id='prez1'></div>
+
+<h3>---</h3>
+
+<!--President height and weight-->
+
+<script>
+
+document.write('<p>Enter a president\'s name to return their height and weight.')
+
+function tabulate2(data,columns) {
+  var table = d3.select('#prez2').append('table')
+    var thead = table.append('thead')
+    var tbody = table.append('tbody')
+
+    thead.append('tr')
+      .selectAll('th')
+        .data(columns)
+        .enter()
+      .append('th')
+        .text(function (d) { return d })
+
+    var rows = tbody.selectAll('tr')
+        .data(data)
+        .enter()
+      .append('tr')
+
+    var cells = rows.selectAll('td')
+        .data(function(row) {
+            return columns.map(function (column) {
+                return { column: column, value: row[column] }
+          })
+      })
+      .enter()
+    .append('td')
+      .text(function (d) { return d.value })
+
+  return table;
+};
+
+function htwt() {
+    var input = document.getElementById('text_input2').value.toLowerCase();  
+    var prez = d3.csv('presidents.csv', function(data) {
+        var columns = ['Name','Height','Weight']
+        var filtered = data.filter(function(d) {
+            if(d.Name.includes(' ')) {
+                return d.Name.toLowerCase().split(' ')[1] == input
+            } else {
+                return d.Name.toLowerCase() == input
+            }
+        });
+        tabulate2(filtered,columns)
+    });
+};
+
+function clear_table2() {
+  return d3.select('#prez2').selectAll('table').remove();
+};
+
+</script>
+
+<form>
+
+<input type='text' id='text_input2' value=''>
+<input type='button' value='Find height and weight' onClick="clear_table2(); htwt()">
+    
+</form>
+
+<div id='prez2'></div>
+
+</body>
+
+</html>
