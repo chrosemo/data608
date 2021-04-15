@@ -176,7 +176,7 @@ function clear_table1() {
 };
 
 function csv() {
-    var prez = d3.csv('presidents.csv', function(data) {
+    var prez = d3.csv('https://raw.githubusercontent.com/chrosemo/data608/main/presidents.csv', function(data) {
         var columns = ['Name','Height','Weight']
         tabulate1(data,columns);
     });
@@ -233,7 +233,7 @@ function tabulate2(data,columns) {
 
 function htwt() {
     var input = document.getElementById('text_input2').value.toLowerCase();  
-    var prez = d3.csv('presidents.csv', function(data) {
+    var prez = d3.csv('https://raw.githubusercontent.com/chrosemo/data608/main/presidents.csv', function(data) {
         var columns = ['Name','Height','Weight']
         var filtered = data.filter(function(d) {
             if(d.Name.includes(' ')) {
